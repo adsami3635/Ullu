@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Access Portal</title>
+  <style>
+    /* Animated gradient background */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(-45deg, #ff6b6b, #ffcc70, #6a11cb, #2575fc);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .card {
+      background: rgba(0,0,0,0.5);
+      padding: 30px;
+      border-radius: 20px;
+      width: min(500px, 90%);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    h1 { font-size: 26px; margin-bottom: 10px; }
+    p { font-size: 16px; margin-bottom: 20px; }
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px;
+      background: #ffcc70;
+      color: #222;
+      transition: 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); }
+    .hidden { display: none; }
+
+    /* confetti */
+    #confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+
+  <div class="card">
+    <div id="steps">
+      <!-- 15 panels -->
+      <section class="panel" data-step="0">
+        <h1>Swagat hai 👋</h1>
+        <p>Aagay barhne k liye chhoti si process follow karo...</p>
+        <button class="btn" data-next>Aagay Barho →</button>
+      </section>
+
+      <section class="panel hidden" data-step="1">
+        <h1>Security Check 🔒</h1>
+        <p>Apna nickname type karo (fake bhi chalega 😹)</p>
+        <button class="btn" data-next>Continue →</button>
+      </section>
+
+      <section class="panel hidden" data-step="2">
+        <h1>System Scan 🖥️</h1>
+        <p>Laga hai tum thore tez ho... ruk jao thoda...</p>
+        <button class="btn" data-next>Aagay →</button>
+      </section>
+
+      <section class="panel hidden" data-step="3">
+        <h1>Verification...</h1>
+        <p>Thoda sabr rakho... sab kuch check ho raha hai 😼</p>
+        <button class="btn" data-next>Aagay →</button>
+      </section>
+
+      <section class="panel hidden" data-step="4">
+        <h1>Oops 😅</h1>
+        <p>Lagta hai tum galat jagah aa gaye...</p>
+        <button class="btn" data-next>Dobara Try →</button>
+      </section>
+
+      <section class="panel hidden" data-step="5">
+        <h1>Wait 🤨</h1>
+        <p>Bas thoda aur... suspense abhi khatam nahi hua!</p>
+        <button class="btn" data-next>Aagay →</button>
+      </section>
+
+      <section class="panel hidden" data-step="6">
+        <h1>Network Error 📡</h1>
+        <p>Aray yaar... internet slow lag raha hai 😹</p>
+        <button class="btn" data-next>Reload →</button>
+      </section>
+
+      <section class="panel hidden" data-step="7">
+        <h1>Almost... 😏</h1>
+        <p>Bas abhi kuch interesting hone wala hai...</p>
+        <button class="btn" data-next>Continue →</button>
+      </section>
+
+      <section class="panel hidden" data-step="8">
+        <h1>Ek aur check 🤔</h1>
+        <p>Kya tum tayyar ho sach dekhne k liye?</p>
+        <button class="btn" data-next>Bilkul →</button>
+      </section>
+
+      <section class="panel hidden" data-step="9">
+        <h1>System Alert ⚠️</h1>
+        <p>Kuch galat detect hua hai... ya phir sirf mazak? 😹</p>
+        <button class="btn" data-next>Aagay →</button>
+      </section>
+
+      <section class="panel hidden" data-step="10">
+        <h1>Loading...</h1>
+        <p>Suspense level 99% reach kar gaya 😼</p>
+        <button class="btn" data-next>Aagay →</button>
+      </section>
+
+      <section class="panel hidden" data-step="11">
+        <h1>Seriously? 😳</h1>
+        <p>Tum abhi tak wait kar rahe ho? Wah!</p>
+        <button class="btn" data-next>Aagay →</button>
+      </section>
+
+      <section class="panel hidden" data-step="12">
+        <h1>Bas 3 steps aur 😏</h1>
+        <p>Himmat hai to aagay jao...</p>
+        <button class="btn" data-next>Aagay →</button>
+      </section>
+
+      <section class="panel hidden" data-step="13">
+        <h1>2 Steps left 🚪</h1>
+        <p>Thoda patience aur rakho...</p>
+        <button class="btn" data-next>Aagay →</button>
+      </section>
+
+      <section class="panel hidden" data-step="14">
+        <h1>Last Chance 😼</h1>
+        <p>Agar yahan tak aa gaye ho to... ab pichay nahi ja sakte!</p>
+        <button class="btn" data-next>Reveal →</button>
+      </section>
+
+      <!-- Final Birthday Reveal -->
+      <section class="panel hidden" data-step="15">
+        <h1>🎉 SURPRISE 🎉</h1>
+        <p>Happy Birthday Dil! 🥳🎂</p>
+        <p>Allah tumhe sehat, lambi zindagi aur kamiyabi de 💖</p>
+        <p>Hamesha muskurate raho aur khush raho 🌹</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+    let step = 0;
+
+    function showStep(n) {
+      panels.forEach(p => p.classList.add('hidden'));
+      const target = document.querySelector(`.panel[data-step="${n}"]`);
+      if (target) target.classList.remove('hidden');
+
+      if(n === 15){ startConfetti(); }
+    }
+
+    document.getElementById('steps').addEventListener('click', (e)=>{
+      if(e.target.hasAttribute('data-next')){
+        step++;
+        showStep(step);
+      }
+    });
+
+    // Confetti
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let confettiPieces = [];
+
+    function resizeCanvas(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function startConfetti(){
+      confettiPieces = Array.from({length:200}, ()=>makePiece());
+      requestAnimationFrame(updateConfetti);
+    }
+    function makePiece(){
+      return {
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height - canvas.height,
+        r: 6+Math.random()*6,
+        vy: 2+Math.random()*3,
+        vx: -1+Math.random()*2,
+        color: `hsl(${Math.random()*360}, 100%, 60%)`
+      };
+    }
+    function updateConfetti(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      confettiPieces.forEach(p=>{
+        p.x += p.vx; p.y += p.vy;
+        if(p.y > canvas.height){ p.y = -10; p.x = Math.random()*canvas.width; }
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.r, p.r);
+      });
+      requestAnimationFrame(updateConfetti);
+    }
+
+    // init
+    showStep(step);
+  </script>
+</body>
+</html>
